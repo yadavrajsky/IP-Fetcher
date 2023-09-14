@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import IPAddressForm from '../IPForm/IPAddressForm'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div><IPAddressForm/></div>
   )
 }
 
