@@ -1,12 +1,10 @@
 const express = require('express');
-const { login, logout } = require('../controllers/authController');
-const { register } = require('../controllers/registrationController'); // Add this line
-const authenticateToken = require('../middlewares/authenticateToken');
 const { insertIPAddress } = require('../controllers/ipController');
+const ipChecking = require('../middlewares/ipChecking');
 
 const router = express.Router();
 
-router.get('', insertIPAddress);
-router.post('', insertIPAddress);
+router.get('',ipChecking, insertIPAddress);
+router.post('',ipChecking, insertIPAddress);
 
 module.exports = router;

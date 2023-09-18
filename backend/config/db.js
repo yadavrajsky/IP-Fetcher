@@ -7,6 +7,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD, // Add your database password
   database: process.env.DB_DATABASE,
+  logging: false, // Disable SQL query logging
   // dialectOptions: {
   //   // Enable SSL for secure database connections (for PostgreSQL or other supported databases)
   //   ssl: process.env.DB_SSL === 'true',

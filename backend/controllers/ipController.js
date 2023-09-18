@@ -5,36 +5,39 @@ const { Sequelize } = require('sequelize');
 const ipAddressPattern = /^(\d{1,3}\.){3}\d{1,3}$/;
 exports.insertIPAddress = async (req, res) => {
     try {
-        const { address } = req.body;
-        // Check if the input address is a valid IPv4 address
-        if (!address.match(ipAddressPattern)) {
-            return res.status(400).json({ error: "Invalid IP address format" });
-        }
+        // const { address } = req.body;
+        // // Check if the input address is a valid IPv4 address
+        // if (!address.match(ipAddressPattern)) {
+        //     return res.status(400).json({ error: "Invalid IP address format" });
+        // }
 
-        if (!address)
-            return res.status(400).json({ error: "IP address cannot be empty" });
+        // if (!address)
+        //     return res.status(400).json({ error: "IP address cannot be empty" });
 
-        // Remove dots (.) from the IP address and limit it to a maximum of 8 characters
-        const firstEightDigits = address.replace(/\./g, '').slice(0, 8);
+        // // Remove dots (.) from the IP address and limit it to a maximum of 8 characters
+        // const firstEightDigits = address.replace(/\./g, '').slice(0, 8);
 
-        // Create a custom SQL query to match IPs
-        const query = `SELECT * FROM IPAddresses WHERE REPLACE(address, '.', '') LIKE '${firstEightDigits}%'`;
-        const existingIP = await sequelize.query(query, {
-            type: Sequelize.QueryTypes.SELECT,
-            model: IPAddress,
-        });
+        // // Create a custom SQL query to match IPs
+        // const query = `SELECT * FROM IPAddresses WHERE REPLACE(address, '.', '') LIKE '${firstEightDigits}%'`;
+        // const existingIP = await sequelize.query(query, {
+        //     type: Sequelize.QueryTypes.SELECT,
+        //     model: IPAddress,
+        // });
 
-        if (existingIP.length > 0) {
-            return res.status(400).json({ error: "The first eight IP digits already exist in the database" });
-        }
+        // if (existingIP.length > 0) {
+        //     return res.status(400).json({ error: "The first eight IP digits already exist in the database" });
+        // }
 
         // Create and insert the IP address with the user
-        await IPAddress.create({
-            address: address, // Store without dots
-            userId: res.locals.userId
-        });
+        if (res.ipCount <= 6) {
+            await IPAddress.create({
+                address: req.body.address, // Store without dots
+                userId: res.locals.userId
+            });
+            return res.status(201).json({ message: 'IP address inserted successfully' });
+        }
+        return res.status(400).json({ error: `${res.ipCount} ${res.ipCount == 1 ? "IP" : "IPs"} found with intial 8 digits similar ` });
 
-        return res.status(201).json({ message: 'IP address inserted successfully' });
     } catch (error) {
         if (error instanceof Sequelize.ValidationError) {
             // Handle validation error here
