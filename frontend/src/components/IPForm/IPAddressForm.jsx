@@ -2,10 +2,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { insertIPAddress, resetNotificationState } from "../../reducers/ipAddressSlice";
-
+import {
+  insertIPAddress,
+  resetNotificationState,
+} from "../../reducers/ipAddressSlice";
+import MoonLoader from "react-spinners/MoonLoader";
+import { Oval } from "react-loader-spinner";
 function IPAddressForm() {
   const dispatch = useDispatch();
+  const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
 
   const { isLoading, error, message } = useSelector((state) => state.ipAddress);
   const [ipAddress, setIpAddress] = useState("");
@@ -19,13 +28,24 @@ function IPAddressForm() {
   }, [dispatch, error, message]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(insertIPAddress({ address:ipAddress}))
+    dispatch(insertIPAddress({ address: ipAddress }));
   };
 
   return (
     <div className="mt-6 flex items-center justify-center">
       {isLoading ? (
-        "Loading..."
+        <Oval
+          height={80}
+          width={80}
+          color="#4fa94d"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#4fa94d"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
       ) : (
         <>
           <form onSubmit={handleSubmit} className="space-y-4">

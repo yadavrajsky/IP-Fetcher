@@ -15,7 +15,7 @@ if (result.error) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Define a list of allowed origins (replace with your own domains)
-const allowedOrigins = ['http://localhost:5173', 'http://127.0.0.1:4000','http://localhost:4000', 'https://ip.quantafile.com'];
+const allowedOrigins = [ 'https://ip.quantafile.com'];
 
 // Configure CORS middleware
 const corsOptions = {
