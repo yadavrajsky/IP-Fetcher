@@ -33,8 +33,8 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, { rejectWith
     return response.data;
   } catch (error) {
     // Display an error message if the request fails
-    toast.error(error.response.error);
-    return rejectWithValue(error.response.error);
+    toast.error(error.response.data.error);
+    return rejectWithValue(error.response.data);
   }
 });
 
