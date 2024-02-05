@@ -61,7 +61,26 @@ Welcome to the IP Address Checker application! This web-based tool allows users 
     npm install
     ```
 
-3. Run the development server:
+3. Update the `vite.config.js` file with the following proxy configuration to handle API requests:
+
+    ```javascript
+    import react from 'vite-plugin-react';
+
+    export default defineConfig({
+      plugins: [react()],
+      server: {
+        proxy: {
+          '/api': {
+            target: 'http://127.0.0.1:4000',
+            changeOrigin: true,
+            secure: false,
+          },
+        },
+      },
+    });
+    ```
+
+4. Run the development server:
 
     ```bash
     npm run dev
