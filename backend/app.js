@@ -15,7 +15,7 @@ if (result.error) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Define a list of allowed origins (replace with your own domains)
-const allowedOrigins = [ 'https://ip.quantafile.com'];
+const allowedOrigins = [ 'http://localhost:3000','http://localhost:5173'];
 
 // Configure CORS middleware
 const corsOptions = {
@@ -45,13 +45,13 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist/index.html"));
 });
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-// sequelize.sync({ force: true }).then(() => {
-//   app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-//   });
-// }).catch(err => {
-//   console.error('Database connection error:', err);
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
 // });
+sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}).catch(err => {
+  console.error('Database connection error:', err);
+});

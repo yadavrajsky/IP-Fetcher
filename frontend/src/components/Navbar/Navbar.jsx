@@ -76,7 +76,7 @@ export default function Navbar() {
               {/* Logo */}
               <div>
                 <span className="px-2 mr-2">
-                  <Link to={"/"}>Quantafile</Link>
+                  <Link to={"/"}>IP Checker</Link>
                   {/* <img
                     src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
                     alt="alt placeholder"
@@ -90,7 +90,7 @@ export default function Navbar() {
                   <>
                     <button
                       type="button"
-                      className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                      className="flex mr-3 text-sm rounded-full border border-black p-1 md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                       id="user-menu-button"
                       aria-expanded="false"
                       data-dropdown-toggle="user-dropdown"
@@ -100,7 +100,7 @@ export default function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="w-8 h-8 rounded-full"
-                        src="/docs/images/people/profile-picture-3.jpg"
+                        src="/profile-svgrepo-com.svg"
                         alt="user photo"
                       />
                     </button>

@@ -7,7 +7,7 @@ const Home = () => {
                 IP Tracker
             </div>
             <p className="text-blue-600 text-center">
-                Under development
+               
             </p>
         </>
 
